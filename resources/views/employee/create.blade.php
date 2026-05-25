@@ -1,12 +1,11 @@
 @extends('layouts.app')
-
 @section('content')
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">{{ __('Employee Management') }}</h1>
+                    <h1 class="m-0">{{ __('Edit Employee') }}</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -16,78 +15,37 @@
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
-        <div class="row">
+            <form action="{{ route('employee.update', $employee->id) }}" method="POST">
+                @csrf
+                @method('PUT')
 
-                  @if (session('status'))
-                      <div class="alert alert-success">{{session('status')}}</div>
-                  @endif
-
-                <div class="col-6 m-auto">
-                  <div class="card card-secondary">
-                   <div class="card-header">
-                     <h3 class="card-title">Add new employee</h3>
-                   </div>
-
-                     <form  action="{{ route('employee.store') }}" method="POST">
-                      @csrf
-                       <div class="row card-body col-12">
-                         <div class="form-group col-12">
-                            <label
-                               for="exampleInputEmail1">First Name
-                            </label>
-                               <input type="text" class="form-control g-2" id="fname" name="fname" placeholder="Enter your Firstname" require>
-                         </div>
-                          @error('fname') <span class="text-danger">{{$message}}</span> @enderror
-                  
-                        <div class="form-group col-12">
-                          <label for="exampleInputPassword1">Last Name</label>
-                          <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter your Last Name">
-                        </div>
-                          @error('lname') <span class="text-danger">{{$message}}</span> @enderror
-
-                        <div class="form-group col-12">
-                           <label for="exampleInputFile">Middle Name</label>
-                   
-                          <input type="text" class="form-control" id="midname" name="midname" placeholder="Enter your Middle Name">
-                        </div>
-                          @error('midname') <span class="text-danger">{{$message}}</span> @enderror
-
-
-                        <div class="form-group col-12">
-                          <label for="exampleInputEmail1">Address</label>
-                          <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address">
-                        </div>
-                          @error('address') <span class="text-danger">{{$message}}</span> @enderror
-
-
-
-                        <div class="form-group col-6">
-                          <label for="exampleInputPassword1">Zip</label>
-                          <input type="number" class="form-control" id="zip" name="zip" placeholder="">
-                        </div>
-                        @error('zip') <span class="text-danger">{{$message}}</span> @enderror
-
-                        <div class="form-group col-6">
-                          <label for="exampleInputPassword1">Age</label>
-                          <input type="number" class="form-control" id="age" name="age" placeholder="">
-                        </div>
-                        @error('age') <span class="text-danger">{{$message}}</span> @enderror
-              
+                <div class="form-group">
+                    <label for="fname">First Name</label>
+                    <input type="text" name="fname" id="fname" class="form-control" value="{{ $employee->fname }}" required>
                 </div>
-                <!-- /.card-body -->
-
-                <div class="card-footer ">
-                  <button type="submit" class="btn btn-success col-12">Submit</a>
+                <div class="form-group">
+                    <label for="lname">Last Name</label>
+                    <input type="text" name="lname" id="lname" class="form-control" value="{{ $employee->lname }}" required>
                 </div>
-
-           
-              </form>
-
-
+                <div class="form-group">
+                    <label for="midname">Middle Name</label>
+                    <input type="text" name="midname" id="midname" class="form-control" value="{{ $employee->midname }}" required>
                 </div>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" name="age" id="age" class="form-control" value="{{ $employee->age }}" required>
                 </div>
-            </div>
-            <!-- /.row -->
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" name="address" id="address" class="form-control" value="{{ $employee->address }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="zip">Zip</label>
+                    <input type="text" name="zip" id="zip" class="form-control" value="{{ $employee->zip }}" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Update Employee</button>
+                <a href="{{ route('employee.index') }}" class="btn btn-secondary">Cancel</a>
+            </form>
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->

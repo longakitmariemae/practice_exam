@@ -53,13 +53,14 @@
                                 <td>{{ $items->age }}</td>
                                 <td>{{ $items->address }}</td>
                                 <td>{{ $items->zip }}</td>
-                                {{-- <td> 
-                                    <span class="badge bg-success"><a href="{{  route('employee.edit')}}" class="btn btn-success mx-3  "><h5>Edit</h5></a></span>
+                                <td>
+                                    <a href="{{ route('employee.edit', $items->id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                    <form action="{{ route('employee.delete', $items->id) }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                    </form>
                                 </td>
-                                <td> 
-                                    
-                                <span class="badge bg-danger"><a href="{{  route('employee.delete')}}" class="m-3 p-lg-5"><h5>Delete</h5></a></span>
-                                </td> --}}
                                 
                             </tr>
                             @endforeach

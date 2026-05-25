@@ -12,7 +12,7 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::all();
-        return view('students.index', compact('students'));
+        return view('student.index', compact('students'));
     }
 
     /**
@@ -20,7 +20,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('students.create');
+        return view('student.create');
     }
 
     /**
@@ -39,7 +39,7 @@ class StudentController extends Controller
 
         Student::create($request->all());
 
-        return redirect()->route('students.index')
+        return redirect()->route('student.index')
                          ->with('success', 'Student created successfully.');
     }
 
@@ -49,7 +49,7 @@ class StudentController extends Controller
     public function show(string $id)
     {
         $student = Student::findOrFail($id);
-        return view('students.show', compact('student'));
+        return view('student.show', compact('student'));
     }
 
     /**
@@ -58,7 +58,7 @@ class StudentController extends Controller
     public function edit(string $id)
     {
         $student = Student::findOrFail($id);
-        return view('students.edit', compact('student'));
+        return view('student.edit', compact('student'));
     }
 
     /**
@@ -78,7 +78,7 @@ class StudentController extends Controller
         $student = Student::findOrFail($id);
         $student->update($request->all());
 
-        return redirect()->route('students.index')
+        return redirect()->route('student.index')
                          ->with('success', 'Student updated successfully.');
     }
 
@@ -90,7 +90,7 @@ class StudentController extends Controller
         $student = Student::findOrFail($id);
         $student->delete();
 
-        return redirect()->route('students.index')
+        return redirect()->route('student.index')
                          ->with('success', 'Student deleted successfully.');
     }
 }
